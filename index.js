@@ -7,11 +7,15 @@ import users from './routes/user.js'
 import cookieParser from 'cookie-parser';
 import cors from "cors";
 import connectDB from './config/db.js'
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import path from 'path';
+
 const PORT=8000;
 dotenv.config();
 connectDB(); 
  
-
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const app=express(); 
 
@@ -32,10 +36,10 @@ app.use('/api/users',users);
 
 app.use(express.static(path.join(__dirname, './client/build')));
 
- app.get('*',function(req,res){
-const index=path.join(__dirname,'./client/build/index.html');
-   res.sendFile(index);
- })
+app.get('*', (req, res) => {
+    const index = join(__dirname, './client/build/index.html');
+    res.sendFile(index);
+  });
 
 
 app.listen(PORT,()=>{
