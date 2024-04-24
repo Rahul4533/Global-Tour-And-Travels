@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './UserRegistration.css'; // Import CSS file for styling
 import axios from 'axios';
 import {message} from 'antd'
+import { useNavigate } from 'react-router-dom';
 function UserRegistration() {
+    const navigate=useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
@@ -26,7 +28,7 @@ function UserRegistration() {
         setUsername('');
         setaddress('');
         setPassword('');
-             
+        navigate('/');
        } catch (error) {    
         
        }
